@@ -5,6 +5,8 @@ import Modal from './ModalAdd';
 import Card from './Card';
 
 function App() {
+    // Erro, quando estava tentando passar uma função para um setState ela estava sendo executada
+    // Contexto é que eu estava tentando passar uma função callBack para o botão do modal, o modal não abria e a função era exeutada duas vezes
     const [cards, setCards] = useState< Array<string> >([]);
     const [ username, setUsername ] = useState<string>('');
     const [ open, setOpen ] = useState<boolean>(false);
