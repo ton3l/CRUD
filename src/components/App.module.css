@@ -1,0 +1,25 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+#add {
+  height: 24px;
+  align-self: flex-end;
+  margin-bottom: 32px;
+}
+
+#modal {
+  margin: auto;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
