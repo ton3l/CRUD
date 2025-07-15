@@ -5,17 +5,15 @@ interface CardProps {
     editCard: (key: number, value: string) => void,
     deleteCard: (key: number) => void,
     username: string,
-    index: number
+    index: number,
+    setUsername: (username: string) => void
 }
 
-function Card( { username, editCard, index, deleteCard }: CardProps ) {
+function Card( { username, editCard, index, deleteCard, setUsername }: CardProps ) {
+    //Neste erro o readonly, sendo ele true ou false, não habilita a edição do TextField
     const [ readOnly, setReadOnly ] = useState<boolean>(true);
-    const [ tempUsername, setTempUsername ] = useState<string>(username);
 
     const handleEdit = () => {
-        if (!readOnly) {
-            editCard(index, tempUsername);
-        }
         setReadOnly(!readOnly);
     };
 
@@ -23,25 +21,15 @@ function Card( { username, editCard, index, deleteCard }: CardProps ) {
         <>
             <MUICard variant="outlined">
                 <CardContent>
-                    {
-                        readOnly ? (
-                            <TextField
-                                value={username}
-                                size="small"
-                                fullWidth
-                                slotProps={{ 
-                                    input: { readOnly: true } 
-                                }}
-                            />
-                        ) : (
-                            <TextField
-                                value={tempUsername}
-                                onChange={(e) => setTempUsername(e.target.value)}
-                                size="small"
-                                fullWidth
-                            />
-                        )
-                    }
+                    <TextField
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        size="small"
+                        fullWidth
+                        slotProps={{ 
+                            input: { readOnly: readOnly } 
+                        }}
+                    />
                 </CardContent>
 
                 <CardActions>

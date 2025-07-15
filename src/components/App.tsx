@@ -59,7 +59,8 @@ function App() {
                             editCard={ editCard }
                             key={ keys++ }
                             index={ keys }
-                            deleteCard={ deleteCard } 
+                            deleteCard={ deleteCard }
+                            setUsername={ setUsername }
                         />
                     )
                 }
