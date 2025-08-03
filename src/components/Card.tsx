@@ -1,12 +1,7 @@
-import { Button, Card as MUICard, CardActions, CardContent, TextField } from '@mui/material'
+import { Button, Card as MUICard, CardActions, CardContent, TextField, Typography } from '@mui/material'
+import type { CardProps } from '../types/props';
+import styles from './styles/Card.module.css';
 import { useState } from 'react'
-
-interface CardProps {
-    editCard: (key: number, value: string) => void,
-    deleteCard: (key: number) => void,
-    username: string,
-    index: number
-}
 
 function Card( { username, editCard, index, deleteCard }: CardProps ) {
     const [ readOnly, setReadOnly ] = useState<boolean>(true);
@@ -25,14 +20,9 @@ function Card( { username, editCard, index, deleteCard }: CardProps ) {
                 <CardContent>
                     {
                         readOnly ? (
-                            <TextField
-                                value={username}
-                                size="small"
-                                fullWidth
-                                slotProps={{ 
-                                    input: { readOnly: true } 
-                                }}
-                            />
+                            <Typography variant="body1" component="div" id={styles.username}>
+                                {username}
+                            </Typography>
                         ) : (
                             <TextField
                                 value={tempUsername}

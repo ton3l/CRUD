@@ -1,13 +1,6 @@
 import { Modal as MUIModal, Paper, TextField, Stack, Button } from '@mui/material';
-import styles from './App.module.css';
-
-interface ModalProps {
-    open: boolean;
-    setOpen: (open: boolean) => void;
-    username: string;
-    setUsername: (username: string) => void;
-    addCard: () => void;
-}
+import type { ModalProps } from '../types/props';
+import styles from './styles/App.module.css';
 
 function Modal({ open, setOpen, username, setUsername, addCard }: ModalProps) {
     return (
