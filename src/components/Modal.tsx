@@ -1,6 +1,6 @@
 import { Modal as MUIModal, Paper, TextField, Stack, Button } from '@mui/material';
 import type { ModalProps } from '../types/props';
-import styles from './styles/App.module.css';
+import styles from './styles/Modal.module.css';
 
 function Modal({ open, setOpen, username, setUsername, addCard }: ModalProps) {
     return (
@@ -8,7 +8,7 @@ function Modal({ open, setOpen, username, setUsername, addCard }: ModalProps) {
             open={ open }
             onClose={ () => setOpen(false) }
         >
-            <Paper sx={{ width: 400 }} id={styles.modal}>
+            <Paper sx={{ width: 400 }} id={styles.paper}>
 
                 <Stack spacing={2} sx={{ height: 300, alignItems: 'center', justifyContent: 'center' }}>
                     <TextField 

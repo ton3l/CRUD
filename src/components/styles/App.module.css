@@ -12,10 +12,6 @@
   margin-bottom: 32px;
 }
 
-#modal {
-  margin: auto;
-}
-
 .cardContainer {
   display: flex;
   flex-wrap: wrap;

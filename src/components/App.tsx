@@ -1,31 +1,24 @@
 import { Stack, Button  } from '@mui/material';
+import type { Username } from '../types/user';
 import styles from './styles/App.module.css';
-import { useState, useEffect } from 'react'
-import Modal from './ModalAdd';
+import { useState, useEffect } from 'react';
+import UserService from '../services/User';
+import Modal from './Modal';
 import Card from './Card';
 
 function App() {
-    const usersUrl = import.meta.env.VITE_API_URL + 'usernames';
     const [ cards, setCards ] = useState<Array<string>>([]);
     const [ username, setUsername ] = useState<string>('');
     const [ open, setOpen ] = useState<boolean>(false);
 
     useEffect(() => {
-        fetch(usersUrl, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        /* eslint-disable */
-        .then(response => response.json())
+        UserService.getUsers() /* eslint-disable */
         .then(users => {
-            const usernames = users.map((user: {name: string}) => user.name);
+            const usernames = users.map((user: Username) => user.name);
             setCards(usernames);
         })
         .catch(error => console.error('Error fetching users:', error));
-    }, [])
-    /* eslint-enable */
+    }, []) /* eslint-enable */
 
     let keys = 0;
 
