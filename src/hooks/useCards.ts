@@ -27,30 +27,33 @@ export default function useCards({ setOpen, username, setUsername }: params) {
     }, []);
     
     const createCard = () => {
-        setOpen(false);
-        UserService.createUser(username);
         /* eslint-disable */
-        new Promise((resolve) => setTimeout(resolve, 300)) //Sem delay puxa dados antigos
-        .then( () => refreshCards() )
+        setOpen(false);
+        UserService.createUser(username)
+        .then(() => {
+            refreshCards();
+        });
         /* eslint-enable */
         setUsername('');
     }
     
     
     const updateCard = (key: number, value: string) => {
-        UserService.updateUser(key, value);
         /* eslint-disable */
-        new Promise((resolve) => setTimeout(resolve, 300)) //Sem delay puxa dados antigos
-        .then( () => refreshCards() )
+        UserService.updateUser(key, value)
+        .then(() => {
+            refreshCards();
+        });
         /* eslint-enable */
         setUsername('');
     }
     
     const deleteCard = (key: number) => {
-        UserService.deleteUser(key);
         /* eslint-disable */
-        new Promise((resolve) => setTimeout(resolve, 300)) //Sem delay puxa dados antigos
-        .then( () => refreshCards() )
+        UserService.deleteUser(key)
+        .then(() => {
+            refreshCards();
+        });
         /* eslint-enable */
     }
 
