@@ -32,7 +32,7 @@ function App() {
                 createCard={createCard}
             />
 
-            <Stack spacing={2} >
+            <Stack spacing={2} id={styles.stack} >
                 { 
                     cards.map((user: User) => 
                         <Card 
