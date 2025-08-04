@@ -1,8 +1,8 @@
 export interface CardProps {
-    editCard: (key: number, value: string) => void,
-    deleteCard: (key: number) => void,
-    username: string,
-    index: number
+    updateCard: (key: number, value: string) => void;
+    deleteCard: (key: number) => void;
+    username: string;
+    index: number;
 }
 
 export interface ModalProps {
@@ -10,5 +10,5 @@ export interface ModalProps {
     setOpen: (open: boolean) => void;
     username: string;
     setUsername: (username: string) => void;
-    addCard: () => void;
+    createCard: () => void;
 }

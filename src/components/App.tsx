@@ -1,42 +1,16 @@
 import { Stack, Button  } from '@mui/material';
 import styles from './styles/App.module.css';
-import { useState, useEffect } from 'react';
-import UserService from '../services/User';
+import { useState } from 'react';
 import type { User } from '../types/user';
 import Modal from './Modal';
 import Card from './Card';
+import useCards from '../hooks/useCards';
 
 function App() {
-    const [ cards, setCards ] = useState<Array<User>>([]);
     const [ username, setUsername ] = useState<string>('');
     const [ open, setOpen ] = useState<boolean>(false);
+    const { createCard, updateCard, deleteCard, cards } = useCards({ setOpen, username, setUsername });
 
-    useEffect(() => { /* eslint-disable */
-        UserService.getUsers() 
-        .then(users => {
-            setCards(users);
-        })
-        .catch(error => console.error('Error fetching users:', error));
-    }, [cards])       /* eslint-enable */
-
-    function deleteCard(key: number) {
-        UserService.deleteUser(key);
-        setCards([...cards]);
-    }
-
-    function editCard(key: number, value: string) {
-        UserService.updateUser(key, value);
-        setCards([...cards]);
-        setUsername('');
-    }
-
-    function addCard() {
-        setOpen(false);
-        UserService.createUser(username);
-        setCards([...cards]);        
-        setUsername('');
-    }
-    
     return (
         <div id={styles.root}>
             <Button
@@ -55,7 +29,7 @@ function App() {
                 setOpen={setOpen}
                 username={username} 
                 setUsername={setUsername} 
-                addCard={addCard}
+                createCard={createCard}
             />
 
             <Stack spacing={2} >
@@ -63,7 +37,7 @@ function App() {
                     cards.map((user: User) => 
                         <Card 
                             username={ user.name }
-                            editCard={ editCard }
+                            updateCard={ updateCard }
                             key={ user.id }
                             index={ user.id }
                             deleteCard={ deleteCard } 

@@ -5,10 +5,10 @@ class UserService {
     
     constructor () {}
 
-    createUser(username: string): void {
+    async createUser(username: string): Promise<void> {
         if (!username) throw new Error('Username cannot be empty');
 
-        fetch(this.url,
+        await fetch(this.url,
             {
                 method: 'POST',
                 headers: {
@@ -33,10 +33,10 @@ class UserService {
         return users;
     }
 
-    updateUser(id: number, newUsername: string): void {
+    async updateUser(id: number, newUsername: string): Promise<void> {
         if (!id || !newUsername) throw new Error('Username or Id cannot be empty');
 
-        fetch(`${this.url}/${id}`,
+        await fetch(`${this.url}/${id}`,
             {
                 method: 'PUT',
                 headers: {
@@ -47,10 +47,10 @@ class UserService {
         );
     }
 
-    deleteUser(id: number): void {
+    async deleteUser(id: number): Promise<void> {
         if (!id) throw new Error('Id cannot be empty');
 
-        fetch(`${this.url}/${id}`,
+        await fetch(`${this.url}/${id}`,
             {
                 method: 'DELETE',
                 headers: {

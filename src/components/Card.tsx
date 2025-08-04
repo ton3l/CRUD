@@ -3,13 +3,13 @@ import type { CardProps } from '../types/props';
 import styles from './styles/Card.module.css';
 import { useState } from 'react'
 
-function Card( { username, editCard, index, deleteCard }: CardProps ) {
+function Card( { username, updateCard, index, deleteCard }: CardProps ) {
     const [ readOnly, setReadOnly ] = useState<boolean>(true);
     const [ tempUsername, setTempUsername ] = useState<string>(username);
 
     const handleEdit = () => {
         if (!readOnly) {
-            editCard(index, tempUsername);
+            updateCard(index, tempUsername);
         }
         setReadOnly(!readOnly);
     };

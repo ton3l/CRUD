@@ -2,7 +2,7 @@ import { Modal as MUIModal, Paper, TextField, Stack, Button } from '@mui/materia
 import type { ModalProps } from '../types/props';
 import styles from './styles/Modal.module.css';
 
-function Modal({ open, setOpen, username, setUsername, addCard }: ModalProps) {
+function Modal({ open, setOpen, username, setUsername, createCard }: ModalProps) {
     return (
         <MUIModal
             open={ open }
@@ -18,7 +18,7 @@ function Modal({ open, setOpen, username, setUsername, addCard }: ModalProps) {
                     />
                     <Button 
                         variant='contained' 
-                        onClick={ addCard }
+                        onClick={ createCard }
                     >
                         Add
                     </Button>
