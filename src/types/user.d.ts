@@ -1,3 +1,4 @@
-export type Username ={
+export type User ={
+    id: number;
     name: string;
 }

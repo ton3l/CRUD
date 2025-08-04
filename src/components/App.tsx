@@ -1,43 +1,39 @@
 import { Stack, Button  } from '@mui/material';
-import type { Username } from '../types/user';
 import styles from './styles/App.module.css';
 import { useState, useEffect } from 'react';
 import UserService from '../services/User';
+import type { User } from '../types/user';
 import Modal from './Modal';
 import Card from './Card';
 
 function App() {
-    const [ cards, setCards ] = useState<Array<string>>([]);
+    const [ cards, setCards ] = useState<Array<User>>([]);
     const [ username, setUsername ] = useState<string>('');
     const [ open, setOpen ] = useState<boolean>(false);
 
-    useEffect(() => {
-        UserService.getUsers() /* eslint-disable */
+    useEffect(() => { /* eslint-disable */
+        UserService.getUsers() 
         .then(users => {
-            const usernames = users.map((user: Username) => user.name);
-            setCards(usernames);
+            setCards(users);
         })
         .catch(error => console.error('Error fetching users:', error));
-    }, []) /* eslint-enable */
-
-    let keys = 0;
+    }, [cards])       /* eslint-enable */
 
     function deleteCard(key: number) {
-        const newCards = [...cards];
-        newCards.splice(key);
-        setCards(newCards);
+        UserService.deleteUser(key);
+        setCards([...cards]);
     }
 
     function editCard(key: number, value: string) {
-        const newCards = [...cards];
-        newCards[key] = value;
-        setCards(newCards);
+        UserService.updateUser(key, value);
+        setCards([...cards]);
         setUsername('');
     }
 
     function addCard() {
         setOpen(false);
-        setCards([ ...cards, username ]);
+        UserService.createUser(username);
+        setCards([...cards]);        
         setUsername('');
     }
     
@@ -64,12 +60,12 @@ function App() {
 
             <Stack spacing={2} >
                 { 
-                    cards.map((username: string) => 
+                    cards.map((user: User) => 
                         <Card 
-                            username={ username }
+                            username={ user.name }
                             editCard={ editCard }
-                            key={ keys++ }
-                            index={ keys }
+                            key={ user.id }
+                            index={ user.id }
                             deleteCard={ deleteCard } 
                         />
                     )
